@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <Modal title="Modal title" name="modal" width="700px" height="400px">
-      <div class="modal-content">
-        Modal content
-      </div>
-    </Modal>
-
     <div class="content">
       <div class="text-center">
         <h1>Vue 3 modal</h1>
@@ -17,9 +11,64 @@
 
       <div class="code-wrapper">
         <highlightjs language="bash" code="$ npm install @dimsog/vue-modal"/>
-        <highlightjs language="xml" :code="demoHtml"/>
-        <highlightjs language="javascript" :code="demoJs"/>
       </div>
+
+
+      <div class="demo-item">
+        <strong>Basic demo</strong>
+        <div class="code-wrapper">
+          <highlightjs language="xml" :code="demoHtml"/>
+          <highlightjs language="javascript" :code="demoJs"/>
+        </div>
+      </div>
+
+      <div class="examples">
+        <h2 class="examples__title">Examples</h2>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Backdrop</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-backdrop')">Open</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlBackdrop"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Disable resizing</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-disable-resize')">Open</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlDisableResize"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Close button</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-custom-close')">Open</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlCloseButton"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <div class="github">
         <a href="https://github.com/dimsog/vue-modal" target="_blank">
@@ -28,11 +77,36 @@
       </div>
 
     </div>
+
+    <Modal title="Modal title" name="modal" width="700px" height="400px">
+      <div class="modal-content">
+        Modal content
+      </div>
+    </Modal>
+    <Modal title="Modal title" name="modal-backdrop" width="700px" height="400px" :backdrop="true">
+      <div class="modal-content">
+        Modal with backdrop
+      </div>
+    </Modal>
+
+    <Modal title="Modal title" name="modal-disable-resize" width="700px" height="400px" :resize="false">
+      <div class="modal-content">
+        Modal content
+      </div>
+    </Modal>
+
+    <Modal title="Modal title" name="modal-custom-close" width="700px" height="400px">
+      <div class="modal-content">
+        <button @click.prevent="close('modal-custom-close')" class="btn btn-success">
+          Close me!
+        </button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Modal, open } from "@dimsog/vue-modal";
+import {close, open, Modal} from "@dimsog/vue-modal";
 
 const demoHtml = `
 <Modal name="modal-name" title="Modal title">
@@ -45,6 +119,28 @@ import "@dimsog/vue-modal/dist/style.css";
 import { Modal, open } from "@dimsog/vue-modal";
 
 open('modal-name');
+`.trim();
+
+const demoHtmlBackdrop = `
+<Modal name="modal-name" title="Modal title" :backdrop="true">
+    Modal content
+</Modal>
+`.trim();
+
+const demoHtmlDisableResize = `
+<Modal name="modal-name" title="Modal title" :resize="false">
+    Modal content
+</Modal>
+`.trim();
+
+const demoHtmlCloseButton = `
+import { Modal, close } from "@dimsog/vue-modal";
+
+<Modal name="modal-name" title="Modal title">
+    <button @click.prevent="close('modal-name')">
+        Close me!
+    </button>
+</Modal>
 `.trim();
 
 </script>
@@ -88,11 +184,34 @@ open('modal-name');
       background: #2cb986;
     }
   }
+
+  .examples {
+    padding-top: 2rem;
+    .examples__title {
+      text-align: center;
+    }
+
+    .example {
+      display: flex;
+      .example__buttons {
+        padding-right: 1rem;
+        width: 200px;
+        button {
+          margin-top: .5rem;
+        }
+      }
+      .example__code {
+        width: 100%;
+      }
+    }
+  }
+
   .content {
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
     padding:0 1rem;
     padding-top: 3rem;
+
     h1 {
       padding: 0;
       margin: 0;
