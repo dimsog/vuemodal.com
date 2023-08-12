@@ -66,9 +66,21 @@
             </div>
           </div>
         </div>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Modal buttons</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-buttons')">Open</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlButtons"/>
+            </div>
+          </div>
+        </div>
       </div>
-
-
 
       <div class="github">
         <a href="https://github.com/dimsog/vue-modal" target="_blank">
@@ -79,38 +91,62 @@
     </div>
 
     <Modal title="Modal title" name="modal" width="700px" height="400px">
-      <div class="modal-content">
-        Modal content
-      </div>
+      <ModalContent>
+        <div class="modal-content">
+          Modal content
+        </div>
+      </ModalContent>
+      <ModalFooter>
+        <ModalButton @click="close('modal')">
+          Close
+        </ModalButton>
+      </ModalFooter>
     </Modal>
+
     <Modal title="Modal title" name="modal-backdrop" width="700px" height="400px" :backdrop="true">
-      <div class="modal-content">
-        Modal with backdrop
-      </div>
+      <ModalContent>
+        <div class="modal-content">
+          Modal with backdrop
+        </div>
+      </ModalContent>
     </Modal>
 
     <Modal title="Modal title" name="modal-disable-resize" width="700px" height="400px" :resize="false">
-      <div class="modal-content">
-        Modal content
-      </div>
+      <ModalContent>
+        <div class="modal-content">
+          Modal content
+        </div>
+      </ModalContent>
     </Modal>
 
     <Modal title="Modal title" name="modal-custom-close" width="700px" height="400px">
-      <div class="modal-content">
-        <button @click.prevent="close('modal-custom-close')" class="btn btn-success">
-          Close me!
-        </button>
-      </div>
+      <ModalContent>
+        <div class="modal-content">
+          <button @click.prevent="close('modal-custom-close')" class="btn btn-success">
+            Close me!
+          </button>
+        </div>
+      </ModalContent>
+    </Modal>
+
+    <Modal title="Modal title" name="modal-buttons" width="700px" height="400px">
+      <ModalContent>
+        <textarea placeholder="Text..." style="width: 100%; height: 100%; padding: 0; margin: 0; border: 0; outline: none"></textarea>
+      </ModalContent>
+      <ModalFooter>
+        <ModalButton @click="close('modal-buttons')">Close</ModalButton>
+        <ModalButton @click="onSave">Save</ModalButton>
+      </ModalFooter>
     </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
-import {close, open, Modal} from "@dimsog/vue-modal";
+import {close, open, Modal, ModalContent, ModalFooter, ModalButton} from "@dimsog/vue-modal";
 
 const demoHtml = `
 <Modal name="modal-name" title="Modal title">
-    Modal content
+  Modal content
 </Modal>
 `.trim();
 
@@ -123,13 +159,17 @@ open('modal-name');
 
 const demoHtmlBackdrop = `
 <Modal name="modal-name" title="Modal title" :backdrop="true">
+  <ModalContent>
     Modal content
+  </ModalContent>
 </Modal>
 `.trim();
 
 const demoHtmlDisableResize = `
 <Modal name="modal-name" title="Modal title" :resize="false">
+  <ModalContent>
     Modal content
+  </ModalContent>
 </Modal>
 `.trim();
 
@@ -137,11 +177,41 @@ const demoHtmlCloseButton = `
 import { Modal, close } from "@dimsog/vue-modal";
 
 <Modal name="modal-name" title="Modal title">
+  <ModalContent>
     <button @click.prevent="close('modal-name')">
         Close me!
     </button>
+  </ModalContent>
 </Modal>
 `.trim();
+
+const demoHtmlButtons = `
+import {
+  Modal,
+  ModalContent,
+  ModalFooter,
+  ModalButton,
+  close
+} from "@dimsog/vue-modal";
+
+<Modal name="modal-name" title="Modal title">
+  <ModalContent>
+    Modal content
+  </ModalContent>
+  <ModalFooter>
+    <ModalButton @click="close('modal-name')">
+      Close
+    </ModalButton>
+    <ModalButton @click="onSave">
+      Save
+    </ModalButton>
+  </ModalFooter>
+</Modal>
+`.trim();
+
+const onSave = () => {
+  alert('Ok!');
+}
 
 </script>
 
