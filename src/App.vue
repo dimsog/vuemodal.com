@@ -146,7 +146,9 @@ import {close, open, Modal, ModalContent, ModalFooter, ModalButton} from "@dimso
 
 const demoHtml = `
 <Modal name="modal-name" title="Modal title">
-  Modal content
+  <ModalContent>
+    Modal content
+  </ModalContent>
 </Modal>
 `.trim();
 
