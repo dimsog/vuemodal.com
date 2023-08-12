@@ -154,7 +154,7 @@ const demoHtml = `
 
 const demoJs = `
 import "@dimsog/vue-modal/dist/style.css";
-import { Modal, open } from "@dimsog/vue-modal";
+import { Modal, ModalContent, open } from "@dimsog/vue-modal";
 
 open('modal-name');
 `.trim();
