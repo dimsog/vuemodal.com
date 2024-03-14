@@ -80,6 +80,20 @@
             </div>
           </div>
         </div>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Min width /<br> min height</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-min-width')">Open</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlMinWithMinHeight"/>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="github">
@@ -137,6 +151,11 @@
         <ModalButton @click="close('modal-buttons')">Close</ModalButton>
         <ModalButton @click="onSave">Save</ModalButton>
       </ModalFooter>
+    </Modal>
+
+    <Modal title="Modal title" name="modal-min-width" min-width="500px" min-height="200px" width="700px" height="400px">
+      <ModalContent>
+      </ModalContent>
     </Modal>
   </div>
 </template>
@@ -208,6 +227,19 @@ import {
       Save
     </ModalButton>
   </ModalFooter>
+</Modal>
+`.trim();
+
+const demoHtmlMinWithMinHeight = `
+<Modal
+    title="Modal title"
+    name="modal-min-width"
+    min-width="500px"
+    min-height="200px"
+    width="700px"
+    height="400px">
+  <ModalContent>
+  </ModalContent>
 </Modal>
 `.trim();
 
