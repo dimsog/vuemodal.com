@@ -5,7 +5,9 @@
         <h1>Vue 3 modal</h1>
 
         <div class="buttons-group">
-          <button class="btn btn-success" @click.prevent="open('modal')">Open 🚀</button>
+          <button class="btn btn-success" @click.prevent="open('modal')">
+            Open
+          </button>
         </div>
       </div>
 
@@ -23,13 +25,12 @@
       </div>
 
       <div class="examples">
-        <h2 class="examples__title">Examples</h2>
 
         <div class="example">
           <div class="example__buttons">
             <strong class="example__title">Backdrop</strong>
             <div>
-              <button class="btn btn-success" @click.prevent="open('modal-backdrop')">Open</button>
+              <button class="btn btn-success" @click.prevent="open('modal-backdrop')">Try it</button>
             </div>
           </div>
           <div class="example__code">
@@ -43,7 +44,7 @@
           <div class="example__buttons">
             <strong class="example__title">Disable resizing</strong>
             <div>
-              <button class="btn btn-success" @click.prevent="open('modal-disable-resize')">Open</button>
+              <button class="btn btn-success" @click.prevent="open('modal-disable-resize')">Try it</button>
             </div>
           </div>
           <div class="example__code">
@@ -57,7 +58,7 @@
           <div class="example__buttons">
             <strong class="example__title">Close button</strong>
             <div>
-              <button class="btn btn-success" @click.prevent="open('modal-custom-close')">Open</button>
+              <button class="btn btn-success" @click.prevent="open('modal-custom-close')">Try it</button>
             </div>
           </div>
           <div class="example__code">
@@ -71,7 +72,7 @@
           <div class="example__buttons">
             <strong class="example__title">Modal buttons</strong>
             <div>
-              <button class="btn btn-success" @click.prevent="open('modal-buttons')">Open</button>
+              <button class="btn btn-success" @click.prevent="open('modal-buttons')">Try it</button>
             </div>
           </div>
           <div class="example__code">
@@ -85,7 +86,7 @@
           <div class="example__buttons">
             <strong class="example__title">Min width /<br> min height</strong>
             <div>
-              <button class="btn btn-success" @click.prevent="open('modal-min-width')">Open</button>
+              <button class="btn btn-success" @click.prevent="open('modal-min-width')">Try it</button>
             </div>
           </div>
           <div class="example__code">
@@ -104,15 +105,25 @@
 
     </div>
 
-    <Modal title="Modal title" name="modal" width="700px" height="400px">
+    <Modal title="Modal title"
+           name="modal"
+           width="500px"
+           height="400px"
+           min-width="400px"
+           min-height="300px"
+           :backdrop="true"
+    >
       <ModalContent>
         <div class="modal-content">
-          Modal content
+          Place for your awesome content
         </div>
       </ModalContent>
       <ModalFooter>
-        <ModalButton @click="close('modal')">
-          Close
+        <ModalButton @click="openGithubPage">
+          <img src="./assets/github-mark.svg" style="height: 20px">
+        </ModalButton>
+        <ModalButton @click="openNpmPage">
+          <img src="./assets/npm.svg" style="height: 20px">
         </ModalButton>
       </ModalFooter>
     </Modal>
@@ -247,6 +258,14 @@ const onSave = () => {
   alert('Ok!');
 }
 
+const openGithubPage = () => {
+  location.href = 'https://github.com/dimsog/vue-modal';
+}
+
+const openNpmPage = () => {
+  location.href = 'https://www.npmjs.com/package/@dimsog/vue-modal';
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -256,6 +275,7 @@ const onSave = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .container {
@@ -263,6 +283,7 @@ const onSave = () => {
   width: 100%;
   justify-content: center;
   display: flex;
+
 
   .code-wrapper {
     pre {
@@ -278,28 +299,29 @@ const onSave = () => {
   .btn {
     border: none;
     font-size: 1rem;
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 1rem 2rem;
+    transition: background-color .3s ease-in-out;
   }
   .btn-success {
-    background: #34d399;
+    background: #005cbb;
     color: #fff;
+    &:hover {
+      background: #0875e5;
+    }
     &:active {
-      background: #2cb986;
+      background: #00428c;
     }
   }
 
   .examples {
     padding-top: 2rem;
-    .examples__title {
-      text-align: center;
-    }
 
     .example {
       display: flex;
       .example__buttons {
         padding-right: 1rem;
-        width: 200px;
+        width: 140px;
         button {
           margin-top: .5rem;
         }
@@ -313,8 +335,7 @@ const onSave = () => {
   .content {
     max-width: 800px;
     width: 100%;
-    padding:0 1rem;
-    padding-top: 3rem;
+    padding: 3rem 0;
 
     h1 {
       padding: 0;
