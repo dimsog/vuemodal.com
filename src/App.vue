@@ -42,6 +42,20 @@
 
         <div class="example">
           <div class="example__buttons">
+            <strong class="example__title">Static backdrop</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-static-backdrop')">Try it</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoStaticBackdrop"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="example">
+          <div class="example__buttons">
             <strong class="example__title">Disable resizing</strong>
             <div>
               <button class="btn btn-success" @click.prevent="open('modal-disable-resize')">Try it</button>
@@ -120,10 +134,10 @@
       </ModalContent>
       <ModalFooter>
         <ModalButton @click="openGithubPage">
-          <img src="./assets/github-mark.svg" style="height: 20px">
+          <img src="./assets/github-mark.svg" style="height: 16px">
         </ModalButton>
         <ModalButton @click="openNpmPage">
-          <img src="./assets/npm.svg" style="height: 20px">
+          <img src="./assets/npm.svg" style="height: 16px">
         </ModalButton>
       </ModalFooter>
     </Modal>
@@ -135,6 +149,15 @@
         </div>
       </ModalContent>
     </Modal>
+
+    <Modal title="Modal title" name="modal-static-backdrop" width="700px" height="400px" :backdrop="true" :static-backdrop="true">
+      <ModalContent>
+        <div class="modal-content">
+          Modal with static backdrop
+        </div>
+      </ModalContent>
+    </Modal>
+
 
     <Modal title="Modal title" name="modal-disable-resize" width="700px" height="400px" :resize="false">
       <ModalContent>
@@ -196,6 +219,22 @@ const demoHtmlBackdrop = `
   </ModalContent>
 </Modal>
 `.trim();
+
+const demoStaticBackdrop = `
+<Modal title="Modal title"
+    name="modal-static-backdrop"
+    width="700px"
+    height="400px"
+    :backdrop="true"
+    :static-backdrop="true"
+  >
+  <ModalContent>
+    <div class="modal-content">
+      Modal with static backdrop
+    </div>
+  </ModalContent>
+</Modal>
+`
 
 const demoHtmlDisableResize = `
 <Modal name="modal-name" title="Modal title" :resize="false">
