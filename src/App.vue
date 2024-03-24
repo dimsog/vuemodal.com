@@ -109,6 +109,20 @@
             </div>
           </div>
         </div>
+
+        <div class="example">
+          <div class="example__buttons">
+            <strong class="example__title">Blacktheme</strong>
+            <div>
+              <button class="btn btn-success" @click.prevent="open('modal-black-theme')">Try it</button>
+            </div>
+          </div>
+          <div class="example__code">
+            <div class="code-wrapper">
+              <highlightjs language="xml" :code="demoHtmlBlackTheme"/>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="github">
@@ -189,6 +203,12 @@
 
     <Modal title="Modal title" name="modal-min-width" min-width="500px" min-height="200px" width="700px" height="400px">
       <ModalContent>
+      </ModalContent>
+    </Modal>
+
+    <Modal title="Black theme" theme="black" name="modal-black-theme">
+      <ModalContent>
+        Black theme
       </ModalContent>
     </Modal>
   </div>
@@ -289,6 +309,17 @@ const demoHtmlMinWithMinHeight = `
     width="700px"
     height="400px">
   <ModalContent>
+  </ModalContent>
+</Modal>
+`.trim();
+
+const demoHtmlBlackTheme = `
+<Modal
+  title="Black theme"
+  theme="black"
+  name="modal-black-theme">
+  <ModalContent>
+    Black theme
   </ModalContent>
 </Modal>
 `.trim();
